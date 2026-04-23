@@ -6,20 +6,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 48432b01d91913451c3512c5b90e31b0f348f1074b166a3431085eb70d784fb1
 
 build:
   noarch: python
-  number: 1004
+  number: 1005
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - six
     - nose >=1.3.7
     - mock >=2.0.0
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: http://github.com/celery/case
